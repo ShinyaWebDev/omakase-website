@@ -1,0 +1,768 @@
+[
+  {
+    "fields": [
+      {
+        "description": "e.g. Cleaning is Therapy",
+        "name": "tagline_en",
+        "type": "string",
+        "title": "Tagline (English)"
+      },
+      {
+        "description": "e.g. お掃除はセラピー！",
+        "name": "tagline_ja",
+        "type": "string",
+        "title": "Tagline (Japanese)"
+      },
+      {
+        "description": "e.g. Japanese-style cleaning for your Sydney home",
+        "name": "heading_en",
+        "type": "string",
+        "title": "Main Heading (English)"
+      },
+      {
+        "name": "heading_ja",
+        "type": "string",
+        "title": "Main Heading (Japanese)"
+      },
+      {
+        "rows": 3,
+        "name": "subheading_en",
+        "type": "text",
+        "title": "Subheading (English)"
+      },
+      {
+        "rows": 3,
+        "name": "subheading_ja",
+        "type": "text",
+        "title": "Subheading (Japanese)"
+      },
+      {
+        "description": "e.g. Book Now",
+        "name": "cta_label_en",
+        "type": "string",
+        "title": "Button Text (English)"
+      },
+      {
+        "description": "e.g. 予約する",
+        "name": "cta_label_ja",
+        "type": "string",
+        "title": "Button Text (Japanese)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "background_image",
+        "type": "image",
+        "title": "Background / Hero Image"
+      }
+    ],
+    "name": "hero",
+    "type": "document",
+    "title": "Hero Section (Top Page)"
+  },
+  {
+    "fields": [
+      {
+        "description": "Lower number = shown first. e.g. 1, 2, 3...",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. Regular Cleaning",
+        "name": "name_en",
+        "type": "string",
+        "title": "Service Name (English)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. 定期清掃",
+        "name": "name_ja",
+        "type": "string",
+        "title": "Service Name (Japanese)"
+      },
+      {
+        "rows": 4,
+        "name": "description_en",
+        "type": "text",
+        "title": "Description (English)"
+      },
+      {
+        "rows": 4,
+        "name": "description_ja",
+        "type": "text",
+        "title": "Description (Japanese)"
+      },
+      {
+        "description": "e.g. $150+ or $80 / session — use text for flexibility",
+        "name": "price",
+        "type": "string",
+        "title": "Price (AUD)"
+      },
+      {
+        "description": "e.g. 2–3 hours",
+        "name": "duration",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "description": "Shows a \"Popular\" or featured badge on the card",
+        "name": "isHighlighted",
+        "type": "boolean",
+        "title": "Highlight this service?"
+      },
+      {
+        "description": "e.g. 🧹 🛁 👴 — just paste an emoji",
+        "name": "icon",
+        "type": "string",
+        "title": "Emoji Icon"
+      }
+    ],
+    "name": "service",
+    "type": "document",
+    "title": "Services"
+  },
+  {
+    "fields": [
+      {
+        "description": "Lower number = shown first. e.g. 1, 2, 3",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. 🧘 👁 🤝 🌏",
+        "name": "icon",
+        "type": "string",
+        "title": "Emoji Icon"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title_en",
+        "type": "string",
+        "title": "Title (English)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title_ja",
+        "type": "string",
+        "title": "Title (Japanese)"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "description_en",
+        "type": "text",
+        "title": "Description (English)"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "description_ja",
+        "type": "text",
+        "title": "Description (Japanese)"
+      }
+    ],
+    "name": "feature",
+    "type": "document",
+    "title": "Why OMAKASE? (Feature Cards)"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "description": "e.g. St Leonards",
+        "name": "suburb",
+        "type": "string",
+        "title": "Suburb Name"
+      },
+      {
+        "initialValue": true,
+        "description": "Turn off to show as \"Coming Soon\" instead of hiding",
+        "name": "isActive",
+        "type": "boolean",
+        "title": "Currently Active?"
+      },
+      {
+        "initialValue": false,
+        "description": "Shows a \"Coming Soon\" badge — useful for Mosman, Manly etc.",
+        "name": "isComingSoon",
+        "type": "boolean",
+        "title": "Coming Soon?"
+      },
+      {
+        "description": "Lower number = shown first",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "area",
+    "type": "document",
+    "title": "Service Areas"
+  },
+  {
+    "fields": [
+      {
+        "description": "Lower number = shown first",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "question_en",
+        "type": "string",
+        "title": "Question (English)"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "question_ja",
+        "type": "string",
+        "title": "Question (Japanese)"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "answer_en",
+        "type": "text",
+        "title": "Answer (English)"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "answer_ja",
+        "type": "text",
+        "title": "Answer (Japanese)"
+      }
+    ],
+    "name": "faq",
+    "type": "document",
+    "title": "FAQ"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g. 0410 062 837",
+        "name": "phone",
+        "type": "string",
+        "title": "Phone / SMS"
+      },
+      {
+        "description": "e.g. omakasejapanesecleaning@gmail.com",
+        "name": "email",
+        "type": "string",
+        "title": "Email Address"
+      },
+      {
+        "description": "International format e.g. +61410062837",
+        "name": "whatsapp",
+        "type": "string",
+        "title": "WhatsApp Number"
+      },
+      {
+        "description": "Without @ — e.g. omakasejapanesecleaning",
+        "name": "instagram_handle",
+        "type": "string"
+      },
+      {
+        "name": "line_id",
+        "type": "string",
+        "title": "LINE ID"
+      },
+      {
+        "rows": 3,
+        "description": "Short note shown near contact buttons, e.g. response times, preferred contact method",
+        "name": "booking_note_en",
+        "type": "text",
+        "title": "Booking Note (English)"
+      },
+      {
+        "rows": 3,
+        "name": "booking_note_ja",
+        "type": "text",
+        "title": "Booking Note (Japanese)"
+      }
+    ],
+    "name": "contact",
+    "type": "document",
+    "title": "Contact Info"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g. About OMAKASE",
+        "name": "heading_en",
+        "type": "string",
+        "title": "Heading (English)"
+      },
+      {
+        "name": "heading_ja",
+        "type": "string",
+        "title": "Heading (Japanese)"
+      },
+      {
+        "rows": 3,
+        "description": "The bold summary sentence shown under the heading.",
+        "name": "lead_en",
+        "type": "text",
+        "title": "Lead / Intro (English)"
+      },
+      {
+        "rows": 3,
+        "name": "lead_ja",
+        "type": "text",
+        "title": "Lead / Intro (Japanese)"
+      },
+      {
+        "rows": 12,
+        "description": "Separate paragraphs with a blank line between them.",
+        "name": "body_en",
+        "type": "text",
+        "title": "Body Text (English)"
+      },
+      {
+        "rows": 12,
+        "description": "段落と段落の間を1行空けてください。",
+        "name": "body_ja",
+        "type": "text",
+        "title": "Body Text (Japanese)"
+      }
+    ],
+    "name": "about",
+    "type": "document",
+    "title": "About Page"
+  },
+  {
+    "fields": [
+      {
+        "rows": 2,
+        "description": "Shown under \"Service Areas\" heading",
+        "name": "areas_hero_desc_en",
+        "type": "text",
+        "title": "Hero Description (English)",
+        "fieldset": "areas"
+      },
+      {
+        "rows": 2,
+        "name": "areas_hero_desc_ja",
+        "type": "text",
+        "title": "Hero Description (Japanese)",
+        "fieldset": "areas"
+      },
+      {
+        "name": "areas_cta_heading_en",
+        "type": "string",
+        "title": "\"Don't see your suburb?\" Heading (English)",
+        "fieldset": "areas"
+      },
+      {
+        "name": "areas_cta_heading_ja",
+        "type": "string",
+        "title": "\"Don't see your suburb?\" Heading (Japanese)",
+        "fieldset": "areas"
+      },
+      {
+        "rows": 2,
+        "name": "areas_cta_body_en",
+        "type": "text",
+        "title": "\"Don't see your suburb?\" Body (English)",
+        "fieldset": "areas"
+      },
+      {
+        "rows": 2,
+        "name": "areas_cta_body_ja",
+        "type": "text",
+        "title": "\"Don't see your suburb?\" Body (Japanese)",
+        "fieldset": "areas"
+      },
+      {
+        "rows": 2,
+        "name": "services_hero_desc_en",
+        "type": "text",
+        "title": "Hero Description (English)",
+        "fieldset": "services"
+      },
+      {
+        "rows": 2,
+        "name": "services_hero_desc_ja",
+        "type": "text",
+        "title": "Hero Description (Japanese)",
+        "fieldset": "services"
+      },
+      {
+        "name": "services_cta_heading_en",
+        "type": "string",
+        "title": "\"Not sure which service?\" Heading (English)",
+        "fieldset": "services"
+      },
+      {
+        "name": "services_cta_heading_ja",
+        "type": "string",
+        "title": "\"Not sure which service?\" Heading (Japanese)",
+        "fieldset": "services"
+      },
+      {
+        "rows": 2,
+        "name": "services_cta_body_en",
+        "type": "text",
+        "title": "\"Not sure which service?\" Body (English)",
+        "fieldset": "services"
+      },
+      {
+        "rows": 2,
+        "name": "services_cta_body_ja",
+        "type": "text",
+        "title": "\"Not sure which service?\" Body (Japanese)",
+        "fieldset": "services"
+      },
+      {
+        "rows": 2,
+        "name": "faq_hero_desc_en",
+        "type": "text",
+        "title": "Hero Description (English)",
+        "fieldset": "faq"
+      },
+      {
+        "rows": 2,
+        "name": "faq_hero_desc_ja",
+        "type": "text",
+        "title": "Hero Description (Japanese)",
+        "fieldset": "faq"
+      },
+      {
+        "name": "faq_cta_heading_en",
+        "type": "string",
+        "title": "\"Still have questions?\" Heading (English)",
+        "fieldset": "faq"
+      },
+      {
+        "name": "faq_cta_heading_ja",
+        "type": "string",
+        "title": "\"Still have questions?\" Heading (Japanese)",
+        "fieldset": "faq"
+      },
+      {
+        "rows": 2,
+        "name": "faq_cta_body_en",
+        "type": "text",
+        "title": "\"Still have questions?\" Body (English)",
+        "fieldset": "faq"
+      },
+      {
+        "rows": 2,
+        "name": "faq_cta_body_ja",
+        "type": "text",
+        "title": "\"Still have questions?\" Body (Japanese)",
+        "fieldset": "faq"
+      },
+      {
+        "rows": 2,
+        "name": "contact_hero_desc_en",
+        "type": "text",
+        "title": "Hero Description (English)",
+        "fieldset": "contact"
+      },
+      {
+        "rows": 2,
+        "name": "contact_hero_desc_ja",
+        "type": "text",
+        "title": "Hero Description (Japanese)",
+        "fieldset": "contact"
+      },
+      {
+        "description": "e.g. \"Fastest response\"",
+        "name": "contact_whatsapp_sub_en",
+        "type": "string",
+        "title": "WhatsApp sub-label (English)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_whatsapp_sub_ja",
+        "type": "string",
+        "title": "WhatsApp sub-label (Japanese)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_line_sub_en",
+        "type": "string",
+        "title": "LINE sub-label (English)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_line_sub_ja",
+        "type": "string",
+        "title": "LINE sub-label (Japanese)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_phone_sub_en",
+        "type": "string",
+        "title": "Phone sub-label (English)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_phone_sub_ja",
+        "type": "string",
+        "title": "Phone sub-label (Japanese)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_email_sub_en",
+        "type": "string",
+        "title": "Email sub-label (English)",
+        "fieldset": "contact"
+      },
+      {
+        "name": "contact_email_sub_ja",
+        "type": "string",
+        "title": "Email sub-label (Japanese)",
+        "fieldset": "contact"
+      },
+      {
+        "description": "e.g. \"Ready to Book?\"",
+        "name": "home_cta_heading_en",
+        "type": "string",
+        "title": "CTA Heading (English)",
+        "fieldset": "homeCta"
+      },
+      {
+        "name": "home_cta_heading_ja",
+        "type": "string",
+        "title": "CTA Heading (Japanese)",
+        "fieldset": "homeCta"
+      },
+      {
+        "rows": 2,
+        "name": "home_cta_body_en",
+        "type": "text",
+        "title": "CTA Body (English)",
+        "fieldset": "homeCta"
+      },
+      {
+        "rows": 2,
+        "name": "home_cta_body_ja",
+        "type": "text",
+        "title": "CTA Body (Japanese)",
+        "fieldset": "homeCta"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "areas",
+        "title": "Areas Page",
+        "options": {
+          "collapsible": true,
+          "collapsed": false
+        }
+      },
+      {
+        "name": "services",
+        "title": "Services Page",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      },
+      {
+        "name": "faq",
+        "title": "FAQ Page",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      },
+      {
+        "name": "contact",
+        "title": "Contact Page",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      },
+      {
+        "name": "homeCta",
+        "title": "Homepage — Contact CTA Section",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      }
+    ],
+    "name": "pageText",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "description": "e.g. OMAKASE Japanese Cleaning",
+        "name": "site_name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "logo",
+        "type": "image",
+        "title": "Logo Image"
+      },
+      {
+        "rows": 2,
+        "description": "Shown in Google search results — keep under 160 characters",
+        "name": "meta_description_en",
+        "type": "text",
+        "title": "SEO Description (English)"
+      },
+      {
+        "rows": 2,
+        "name": "meta_description_ja",
+        "type": "text",
+        "title": "SEO Description (Japanese)"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "English",
+              "value": "en"
+            },
+            {
+              "title": "Japanese / 日本語",
+              "value": "ja"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "en",
+        "name": "default_language",
+        "type": "string"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  }
+]

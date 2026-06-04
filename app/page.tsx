@@ -7,14 +7,17 @@ import ServicesSection from '@/components/ServicesSection'
 import AreasSection from '@/components/AreasSection'
 import ContactCTA from '@/components/ContactCTA'
 
+export const revalidate = 60
+
 export default async function HomePage() {
+  const opts = { next: { revalidate: 60 } }
   const [hero, features, services, areas, contact, pageText] = await Promise.all([
-    client.fetch<Hero | null>(heroQuery),
-    client.fetch<Feature[]>(featuresQuery),
-    client.fetch<Service[]>(servicesQuery),
-    client.fetch<Area[]>(areasQuery),
-    client.fetch<Contact | null>(contactQuery),
-    client.fetch<PageText | null>(pageTextQuery),
+    client.fetch<Hero | null>(heroQuery, {}, opts),
+    client.fetch<Feature[]>(featuresQuery, {}, opts),
+    client.fetch<Service[]>(servicesQuery, {}, opts),
+    client.fetch<Area[]>(areasQuery, {}, opts),
+    client.fetch<Contact | null>(contactQuery, {}, opts),
+    client.fetch<PageText | null>(pageTextQuery, {}, opts),
   ])
 
   return (

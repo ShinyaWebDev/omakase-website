@@ -7,6 +7,8 @@ import { client } from '@/sanity/lib/client'
 import { contactQuery } from '@/sanity/lib/queries'
 import type { Contact } from '@/types/sanity'
 
+export const revalidate = 60
+
 const noto = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
@@ -25,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const contact = await client.fetch<Contact | null>(contactQuery)
+  const contact = await client.fetch<Contact | null>(contactQuery, {}, { next: { revalidate: 60 } })
 
   return (
     <html lang="en" className={`${noto.variable} h-full`}>

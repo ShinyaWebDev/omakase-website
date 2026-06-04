@@ -13,12 +13,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/studio',
-        destination: 'https://rlrfcdqt.sanity.studio',
+        destination: 'https://omakase-cleaning.sanity.studio',
         permanent: false,
       },
       {
         source: '/studio/:path*',
-        destination: 'https://rlrfcdqt.sanity.studio/:path*',
+        destination: 'https://omakase-cleaning.sanity.studio/:path*',
         permanent: false,
       },
     ]
