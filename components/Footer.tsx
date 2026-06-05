@@ -43,7 +43,7 @@ export default function Footer() {
             {lang === 'en' ? 'Company' : '会社情報'}
           </h4>
           {[
-            { en: 'About', ja: '私たちについて', href: '/about' },
+            { en: 'Our Philosophy', ja: '私たちの想い', href: '/#about' },
             { en: 'Service Areas', ja: 'エリア', href: '/areas' },
             { en: 'FAQ', ja: 'よくある質問', href: '/faq' },
           ].map((item) => (

@@ -37,7 +37,7 @@ export default function TherapySection() {
   const t = copy[lang]
 
   return (
-    <section className="py-24 md:py-30">
+    <section id="about" className="py-24 md:py-30 scroll-mt-24">
       <div className="max-w-[1200px] mx-auto px-4 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 md:order-1">

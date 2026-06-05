@@ -1,15 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
+import { urlFor } from '@/sanity/lib/image'
+import type { SiteSettings } from '@/types/sanity'
 
 const navItems = {
   en: [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
-    { label: 'About', href: '/about' },
     { label: 'Areas', href: '/areas' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
@@ -17,18 +19,24 @@ const navItems = {
   ja: [
     { label: 'ホーム', href: '/' },
     { label: 'サービス', href: '/services' },
-    { label: '私たちについて', href: '/about' },
     { label: 'エリア', href: '/areas' },
     { label: 'よくある質問', href: '/faq' },
     { label: 'お問い合わせ', href: '/contact' },
   ],
 }
 
-export default function Header() {
+interface Props {
+  siteSettings: SiteSettings | null
+}
+
+export default function Header({ siteSettings }: Props) {
   const { lang, setLang } = useLanguage()
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const items = navItems[lang]
+  const logoUrl = siteSettings?.logo
+    ? urlFor(siteSettings.logo).width(96).height(96).fit('max').url()
+    : null
 
   return (
     <header className="fixed top-0 w-full z-50 border-b border-outline-variant/30 backdrop-blur-md bg-surface/90">
@@ -36,7 +44,18 @@ export default function Header() {
 
         <Link href="/" className="flex items-center gap-3 text-primary">
           <span className="grid size-10 place-items-center rounded-full border border-primary/30 bg-primary-fixed/50 text-lg font-light">
-            O
+            {logoUrl ? (
+              <Image
+                src={logoUrl}
+                alt={siteSettings?.site_name || 'OMAKASE logo'}
+                width={32}
+                height={32}
+                className="h-8 w-8 object-contain"
+                priority
+              />
+            ) : (
+              'O'
+            )}
           </span>
           <span className="font-light tracking-widest text-2xl">
             OMAKASE

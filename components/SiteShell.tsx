@@ -4,14 +4,15 @@ import { usePathname } from 'next/navigation'
 import Header from './Header'
 import Footer from './Footer'
 import ContactBar from './ContactBar'
-import type { Contact } from '@/types/sanity'
+import type { Contact, SiteSettings } from '@/types/sanity'
 
 interface Props {
   children: React.ReactNode
   contact: Contact | null
+  siteSettings: SiteSettings | null
 }
 
-export default function SiteShell({ children, contact }: Props) {
+export default function SiteShell({ children, contact, siteSettings }: Props) {
   const pathname = usePathname()
   const isStudio = pathname?.startsWith('/studio')
 
@@ -21,7 +22,7 @@ export default function SiteShell({ children, contact }: Props) {
 
   return (
     <>
-      <Header />
+      <Header siteSettings={siteSettings} />
       <main className="flex-1 pb-16 md:pb-0">{children}</main>
       <Footer />
       <ContactBar contact={contact} />

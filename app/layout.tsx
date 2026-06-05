@@ -4,8 +4,8 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 import SiteShell from '@/components/SiteShell'
 import { client } from '@/sanity/lib/client'
-import { contactQuery } from '@/sanity/lib/queries'
-import type { Contact } from '@/types/sanity'
+import { contactQuery, siteSettingsQuery } from '@/sanity/lib/queries'
+import type { Contact, SiteSettings } from '@/types/sanity'
 
 export const revalidate = 60
 
@@ -15,7 +15,6 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 })
-
 const noto = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
@@ -34,7 +33,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const contact = await client.fetch<Contact | null>(contactQuery, {}, { next: { revalidate: 60 } })
+  const opts = { next: { revalidate: 60 } }
+  const [contact, siteSettings] = await Promise.all([
+    client.fetch<Contact | null>(contactQuery, {}, opts),
+    client.fetch<SiteSettings | null>(siteSettingsQuery, {}, opts),
+  ])
 
   return (
     <html lang="en" className={`${inter.variable} ${noto.variable} h-full`}>
@@ -46,7 +49,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <LanguageProvider>
-          <SiteShell contact={contact}>{children}</SiteShell>
+          <SiteShell contact={contact} siteSettings={siteSettings}>{children}</SiteShell>
         </LanguageProvider>
       </body>
     </html>
