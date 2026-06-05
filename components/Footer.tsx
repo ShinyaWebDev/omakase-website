@@ -3,107 +3,78 @@
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 
-const navItems = {
-  en: [
-    { label: 'Services', href: '/services' },
-    { label: 'About', href: '/about' },
-    { label: 'Areas', href: '/areas' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Contact', href: '/contact' },
-  ],
-  ja: [
-    { label: 'サービス', href: '/services' },
-    { label: '私たちについて', href: '/about' },
-    { label: 'エリア', href: '/areas' },
-    { label: 'よくある質問', href: '/faq' },
-    { label: 'お問い合わせ', href: '/contact' },
-  ],
-}
-
-const copy = {
-  en: {
-    tagline: 'Japanese-style cleaning for your Sydney home.',
-    rights: '© 2025 OMAKASE Japanese Cleaning. All rights reserved.',
-    instagram: 'Instagram',
-  },
-  ja: {
-    tagline: 'シドニーのご自宅に、日本式のお掃除を。',
-    rights: '© 2025 OMAKASE Japanese Cleaning. 無断転載禁止。',
-    instagram: 'Instagram',
-  },
-}
-
 export default function Footer() {
   const { lang } = useLanguage()
-  const items = navItems[lang]
-  const c = copy[lang]
 
   return (
-    <footer className="bg-navy text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pb-10 border-b border-white/10">
-          <div className="sm:col-span-1">
-            <div className="mb-3">
-              <span className="font-bold text-lg tracking-tight">OMAKASE</span>
-              <span className="block text-[10px] text-white/50 tracking-widest uppercase mt-0.5">
-                Japanese Cleaning
-              </span>
-            </div>
-            <p className="text-sm text-white/60 leading-relaxed max-w-xs">{c.tagline}</p>
-          </div>
+    <footer className="w-full bg-surface-container">
+      <div className="max-w-300 mx-auto px-4 md:px-16 py-20 grid grid-cols-1 md:grid-cols-4 gap-6">
 
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
-              {lang === 'en' ? 'Pages' : 'ページ'}
-            </h3>
-            <ul className="space-y-2">
-              {items.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
-              {lang === 'en' ? 'Connect' : 'つながる'}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-sm text-white/70 hover:text-white transition-colors"
-                >
-                  WhatsApp
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-sm text-white/70 hover:text-white transition-colors"
-                >
-                  LINE
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-sm text-white/70 hover:text-white transition-colors"
-                >
-                  {c.instagram}
-                </Link>
-              </li>
-            </ul>
-          </div>
+        <div className="md:col-span-1">
+          <div className="text-2xl font-light text-primary tracking-widest mb-4">OMAKASE</div>
+          <p className="text-on-surface-variant text-sm leading-relaxed">
+            {lang === 'en'
+              ? '© 2025 OMAKASE Japanese Cleaning. Serenity in Every Corner.'
+              : '© 2025 OMAKASE Japanese Cleaning. 隅々まで、整う安心を。'}
+          </p>
         </div>
 
-        <p className="pt-6 text-xs text-white/40 text-center">{c.rights}</p>
+        <div className="flex flex-col gap-2">
+          <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
+            {lang === 'en' ? 'Services' : 'サービス'}
+          </h4>
+          {[
+            { en: 'Basic Cleaning', ja: '基本清掃', href: '/services' },
+            { en: 'Reset Cleaning', ja: 'リセット清掃', href: '/services' },
+            { en: 'NDIS Support', ja: 'NDIS支援', href: '/services' },
+          ].map((item) => (
+            <Link
+              key={item.href + item.en}
+              href={item.href}
+              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+            >
+              {lang === 'en' ? item.en : item.ja}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
+            {lang === 'en' ? 'Company' : '会社情報'}
+          </h4>
+          {[
+            { en: 'About', ja: '私たちについて', href: '/about' },
+            { en: 'Service Areas', ja: 'エリア', href: '/areas' },
+            { en: 'FAQ', ja: 'よくある質問', href: '/faq' },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+            >
+              {lang === 'en' ? item.en : item.ja}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
+            {lang === 'en' ? 'Connect' : 'つながる'}
+          </h4>
+          {[
+            { label: 'WhatsApp', href: '/contact' },
+            { label: 'LINE', href: '/contact' },
+            { label: 'Instagram', href: '/contact' },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </footer>
   )

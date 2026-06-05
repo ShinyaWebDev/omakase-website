@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 import type { About, Feature } from '@/types/sanity'
@@ -7,22 +8,20 @@ import type { About, Feature } from '@/types/sanity'
 const fallbackCopy = {
   en: {
     heading: 'About OMAKASE',
-    lead: '"Cleaning is Therapy" — we believe a tidy space doesn\'t just look good. It resets your mind, restores your focus, and genuinely improves your day.',
+    lead: '"Cleaning is Therapy" - we believe a tidy space does not just look good. It resets your mind, restores your focus, and genuinely improves your day.',
     body: [
-      'OMAKASE means "leave it to us" — and that\'s exactly the relationship we\'re here to build. Hand over your home with full confidence, and we\'ll take care of it with the precision and respect it deserves.',
-      'We know the feeling: a messy room that kills your concentration. A home you can\'t relax in. A to-do list that never ends. Housework shouldn\'t be one more thing weighing you down. That\'s where we come in.',
-      'Our cleaning style is rooted in Japanese tradition — shoes off at the door, eyes trained to catch what others miss (window frames, switch plates, skirting boards, every corner of the bathroom). We show up on time, dressed neatly, and treat your home as if it were our own.',
-      'We serve busy families, remote workers, elderly residents, and the Japanese community across Sydney\'s Lower North Shore. Whether you need a one-off reset or a regular visit, we\'ll work with you.',
+      'OMAKASE means "leave it to us" - and that is exactly the relationship we are here to build. Hand over your home with confidence, and we will care for it with the precision and respect it deserves.',
+      'Our cleaning style is rooted in Japanese tradition: shoes off at the door, eyes trained to catch what others miss, and a calm respect for the rhythm of your home.',
+      "We serve busy families, remote workers, elderly residents, and Sydney's Japanese community across the Lower North Shore. Whether you need a one-off reset or a regular visit, we will work with you.",
     ],
   },
   ja: {
     heading: 'OMAKASEについて',
-    lead: '「お掃除はセラピー」― 空間を整えることは、心と体を整えること。私たちはそう信じています。',
+    lead: '「お掃除はセラピー」- 空間を整えることは、心と体を整えること。私たちはそう信じています。',
     body: [
-      '「おまかせ」とは、信頼して委ねること。お客様が安心してお家を預けられるサービスを、誠実にお届けするために、私たちは存在しています。',
-      '散らかった部屋では集中できない。家にいてもリラックスできない。家事の負担で疲れ果てている。そんな日常のストレスを、「整った空間」が解決へ導きます。これがまさに、"Cleaning is Therapy"の考え方です。',
-      '私たちのスタイルは日本式。玄関で靴を脱ぎ、「見逃さない視線」で細部まで丁寧に。窓枠、スイッチ周り、スカーティング、水回りの隅々まで。時間厳守、清潔な身だしなみ、礼儀を大切にした、日本人クオリティをお約束します。',
-      '共働きや在宅ワークのご家庭、高齢者のお客様、シドニー在住の日本人の方まで、ローワーノースショアを中心に幅広くご対応。単発のリセット清掃から定期訪問まで、柔軟にご相談ください。',
+      '「おまかせ」とは、信頼して委ねること。お客様が安心してお家を預けられるサービスを、誠実にお届けします。',
+      '私たちのスタイルは日本式。玄関で靴を脱ぎ、見逃さない視線で細部まで丁寧に。時間、身だしなみ、礼儀を大切にします。',
+      '共働きや在宅ワークのご家庭、高齢者のお客様、シドニー在住の日本人の方まで、ローワーノースショアを中心に幅広くご対応します。',
     ],
   },
 }
@@ -37,69 +36,132 @@ function parseParagraphs(text: string | undefined): string[] {
   return text.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
 }
 
+function FeatureIcon({ icon }: { icon?: string }) {
+  if (!icon) return <span className="material-symbols-outlined text-primary text-3xl">spa</span>
+  const isMaterialIcon = icon.includes('_') || /^[a-z]+$/.test(icon)
+  return isMaterialIcon ? (
+    <span className="material-symbols-outlined text-primary text-3xl">{icon}</span>
+  ) : (
+    <span className="text-3xl">{icon}</span>
+  )
+}
+
 export default function AboutContent({ about, features }: Props) {
   const { lang } = useLanguage()
   const fb = fallbackCopy[lang]
 
-  const heading = about?.[`heading_${lang}` as keyof About] as string | undefined || fb.heading
-  const lead = about?.[`lead_${lang}` as keyof About] as string | undefined || fb.lead
+  const heading = (about?.[`heading_${lang}` as keyof About] as string | undefined) || fb.heading
+  const lead = (about?.[`lead_${lang}` as keyof About] as string | undefined) || fb.lead
   const bodyRaw = about?.[`body_${lang}` as keyof About] as string | undefined
   const paragraphs = bodyRaw ? parseParagraphs(bodyRaw) : fb.body
+  const values = features.length > 0 ? features : [
+    {
+      _id: 'omotenashi',
+      title_en: 'Omotenashi Spirit',
+      title_ja: 'おもてなしの心',
+      description_en: 'Thoughtful care that notices what makes a home feel peaceful.',
+      description_ja: '住まいが心地よく整うための、小さな気配りを大切にします。',
+      icon: 'favorite',
+    },
+    {
+      _id: 'detail',
+      title_en: 'Meticulous Detail',
+      title_ja: '細部へのこだわり',
+      description_en: 'Edges, switches, skirting boards, and quiet corners are part of the work.',
+      description_ja: '巾木、スイッチ周り、端や隅まで、見落としやすい箇所も丁寧に。',
+      icon: 'search',
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-warm-white">
-      <div className="bg-navy text-white py-16 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-teal text-sm font-semibold tracking-[0.2em] uppercase mb-3">
+    <div className="min-h-screen bg-background pt-18">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=80"
+            alt="Calm Japanese inspired home interior"
+            fill
+            priority
+            className="object-cover opacity-35"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
+        </div>
+        <div className="relative mx-auto max-w-[1200px] px-4 md:px-16 py-24 md:py-32 text-center">
+          <p className="japanese-label mb-4 text-xs font-semibold uppercase text-primary">
             {lang === 'en' ? 'Our Story' : '私たちについて'}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">{heading}</h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto leading-relaxed">{lead}</p>
+          <h1 className="mx-auto mb-6 max-w-3xl text-[36px] md:text-[56px] font-light leading-[1.15]">
+            {heading}
+          </h1>
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+            {lead}
+          </p>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-        <div className="space-y-5 mb-14">
-          {paragraphs.map((para, i) => (
-            <p key={i} className="text-gray-700 leading-relaxed text-base sm:text-lg">
-              {para}
-            </p>
-          ))}
-        </div>
+      <section className="mx-auto max-w-[1200px] px-4 md:px-16 py-20 md:py-30">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 items-start">
+          <div className="lg:col-span-5">
+            <div className="sticky top-28 overflow-hidden rounded-xl bg-surface-container">
+              <div className="relative h-[420px]">
+                <Image
+                  src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1200&q=80"
+                  alt="Freshly cleaned kitchen counter"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                />
+              </div>
+              <div className="p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  Cleaning is Therapy
+                </p>
+              </div>
+            </div>
+          </div>
 
-        {features.length > 0 && (
-          <>
-            <h2 className="text-2xl font-bold text-navy mb-8 text-center">
-              {lang === 'en' ? 'What We Stand For' : '私たちの大切にすること'}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-14">
-              {features.map((f) => (
-                <div
-                  key={f._id}
-                  className="p-6 bg-white rounded-2xl border border-gray-100 hover:shadow-sm transition-shadow"
-                >
-                  {f.icon && <div className="text-3xl mb-3">{f.icon}</div>}
-                  <h3 className="font-bold text-navy mb-1.5">
-                    {lang === 'en' ? f.title_en : f.title_ja}
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {lang === 'en' ? f.description_en : f.description_ja}
-                  </p>
-                </div>
+          <div className="lg:col-span-7">
+            <div className="space-y-6 text-lg leading-relaxed text-on-surface-variant">
+              {paragraphs.map((para) => (
+                <p key={para}>{para}</p>
               ))}
             </div>
-          </>
-        )}
 
-        <div className="text-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white font-semibold rounded-full hover:bg-opacity-90 transition-all duration-200"
-          >
-            {lang === 'en' ? 'Book a Clean' : '予約する'}
-          </Link>
+            <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {values.map((feature) => (
+                <article
+                  key={feature._id}
+                  className="rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-6 shadow-sm"
+                >
+                  <FeatureIcon icon={feature.icon} />
+                  <h3 className="mt-4 mb-2 text-xl font-medium">
+                    {lang === 'en' ? feature.title_en : feature.title_ja}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-on-surface-variant">
+                    {lang === 'en' ? feature.description_en : feature.description_ja}
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/services#booking"
+                className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 text-xs font-semibold uppercase tracking-widest text-on-primary hover:opacity-90"
+              >
+                {lang === 'en' ? 'Book a Clean' : '予約する'}
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center rounded-full border border-primary px-8 py-3 text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary/5"
+              >
+                {lang === 'en' ? 'Explore Services' : 'サービスを見る'}
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

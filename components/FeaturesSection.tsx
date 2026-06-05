@@ -7,29 +7,29 @@ const fallbackFeatures: Feature[] = [
   {
     _id: 'f1',
     order: 1,
-    icon: '🧘',
-    title_en: 'Cleaning is Therapy',
-    title_ja: 'お掃除はセラピー',
-    description_en: "A clean space resets your mind. We're not just tidying rooms — we're helping you reclaim your calm, focus, and quality of life.",
-    description_ja: '整った空間は、心をリセットします。ただ部屋をきれいにするだけでなく、暮らしの質を高めるお手伝いをしています。',
+    icon: 'favorite',
+    title_en: 'Omotenashi Spirit',
+    title_ja: 'おもてなしの心',
+    description_en: 'Wholehearted hospitality in every corner.',
+    description_ja: '隅々まで心を込めたおもてなし。',
   },
   {
     _id: 'f2',
     order: 2,
-    icon: '👁',
-    title_en: 'The No-Miss Gaze',
-    title_ja: '見逃さない視線',
-    description_en: 'Window frames, switch plates, skirting boards, every corner of the water area. We see what others overlook — and we clean it.',
-    description_ja: '窓枠・スイッチ周り・スカーティング・水回りの細部まで。他が見落とすところを、私たちは見逃しません。',
+    icon: 'do_not_step',
+    title_en: 'Japanese-Style Shoes Off',
+    title_ja: '日本式・土足厳禁',
+    description_en: "Respecting your home's sacred boundaries.",
+    description_ja: '大切な住まいの境界を丁寧に尊重します。',
   },
   {
     _id: 'f3',
     order: 3,
-    icon: '🤝',
-    title_en: 'Flexible & Personal',
-    title_ja: '柔軟なサービス',
-    description_en: 'One-off trial, regular visits, pair cleaning sessions, elderly support — we adapt to what you actually need, not a fixed package.',
-    description_ja: 'お試し単発・定期訪問・ペア掃除・高齢者向けプランなど、お客様のニーズに合わせてカスタマイズします。',
+    icon: 'flare',
+    title_en: 'Meticulous Attention',
+    title_ja: '細部へのこだわり',
+    description_en: 'No detail is too small for our precision.',
+    description_ja: '小さな箇所まで丁寧に整えます。',
   },
 ]
 
@@ -37,40 +37,54 @@ interface Props {
   features: Feature[]
 }
 
+function FeatureIcon({ icon }: { icon: string | undefined }) {
+  const isMaterialIcon = icon && !icon.includes(' ') && icon === icon.toLowerCase()
+
+  if (isMaterialIcon) {
+    return (
+      <span className="material-symbols-outlined text-primary text-3xl shrink-0">
+        {icon}
+      </span>
+    )
+  }
+
+  return <div className="text-3xl shrink-0">{icon}</div>
+}
+
 export default function FeaturesSection({ features }: Props) {
   const { lang } = useLanguage()
   const items = features.length > 0 ? features : fallbackFeatures
 
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <p className="text-teal text-sm font-semibold tracking-[0.2em] uppercase mb-3">
-            {lang === 'en' ? 'Why Choose Us' : 'なぜOMAKASEか'}
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-navy">
-            {lang === 'en' ? 'Why OMAKASE?' : 'OMAKASEを選ぶ理由'}
-          </h2>
-        </div>
+  const jaLabels: Record<string, string> = {
+    'f1': '土足厳禁',
+    'f2': '細部へのこだわり',
+    'f3': '時間厳守',
+  }
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {items.map((feature) => (
-            <div
-              key={feature._id}
-              className="group p-8 rounded-2xl border border-gray-100 hover:border-teal/20 hover:shadow-lg transition-all duration-300 bg-warm-white"
-            >
-              {feature.icon && (
-                <div className="text-4xl mb-5">{feature.icon}</div>
-              )}
-              <h3 className="text-xl font-bold text-navy mb-3">
+  return (
+    <section className="bg-surface-container py-10 md:py-12 border-y border-outline-variant/20">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {items.map((feature) => (
+          <div
+            key={feature._id}
+            className="flex items-center gap-4"
+          >
+            <FeatureIcon icon={feature.icon} />
+            <div>
+              <h3 className="text-lg md:text-xl font-medium leading-[1.4] mb-1">
                 {lang === 'en' ? feature.title_en : feature.title_ja}
               </h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-on-surface-variant text-sm leading-relaxed">
                 {lang === 'en' ? feature.description_en : feature.description_ja}
               </p>
+              {lang === 'en' && jaLabels[feature._id] && (
+                <p className="mt-2 text-outline text-[10px] font-semibold japanese-label">
+                  {jaLabels[feature._id]}
+                </p>
+              )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </section>
   )

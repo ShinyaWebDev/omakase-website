@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --navy: #1B4F72;
-  --teal: #2E86AB;
-  --warm-white: #FAFAF9;
-  --brand-text: #1A1A1A;
-}
-
 @theme inline {
-  --color-navy: var(--navy);
-  --color-teal: var(--teal);
-  --color-warm-white: var(--warm-white);
-  --color-brand-text: var(--brand-text);
-  --font-sans: var(--font-noto), system-ui, sans-serif;
+  /* Stitch Design System — Sage Green Palette */
+  --color-primary: #3c6752;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #7daa92;
+  --color-on-primary-container: #123f2c;
+  --color-primary-fixed: #beedd3;
+  --color-primary-fixed-dim: #a2d1b7;
+  --color-on-primary-fixed: #002114;
+  --color-on-primary-fixed-variant: #244f3b;
+  --color-secondary: #6b5c4c;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #f4dfcb;
+  --color-on-secondary-container: #716252;
+  --color-tertiary: #505f78;
+  --color-on-tertiary: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-on-surface: #1a1c1c;
+  --color-on-surface-variant: #414943;
+  --color-surface-variant: #e2e2e2;
+  --color-surface-container: #eeeeee;
+  --color-surface-container-low: #f3f3f3;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container-highest: #e2e2e2;
+  --color-surface-bright: #f9f9f9;
+  --color-surface-dim: #dadada;
+  --color-outline: #717973;
+  --color-outline-variant: #c1c8c2;
+  --color-background: #f9f9f9;
+  --color-on-background: #1a1c1c;
+  --color-inverse-surface: #2f3131;
+  --color-inverse-on-surface: #f1f1f1;
+  --color-inverse-primary: #a2d1b7;
+
+  /* Font stack */
+  --font-sans: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
+
+  /* Border radius — Stitch scale */
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
 }
 
 body {
-  background-color: var(--warm-white);
-  color: var(--brand-text);
-  font-family: var(--font-sans);
+  background-color: #f9f9f9;
+  color: #1a1c1c;
+  font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Material Symbols base */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  font-size: inherit;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* Japanese decorative label */
+.japanese-label {
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.paper-texture {
+  background-color: #f3f3f3;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(60 103 82 / 0.08) 1px, transparent 0);
+  background-size: 22px 22px;
 }

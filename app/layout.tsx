@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_JP } from 'next/font/google'
+import { Inter, Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 import SiteShell from '@/components/SiteShell'
@@ -8,6 +8,13 @@ import { contactQuery } from '@/sanity/lib/queries'
 import type { Contact } from '@/types/sanity'
 
 export const revalidate = 60
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 const noto = Noto_Sans_JP({
   subsets: ['latin'],
@@ -19,7 +26,7 @@ const noto = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: 'OMAKASE Japanese Cleaning — Sydney Lower North Shore',
   description:
-    'Japanese-style residential cleaning service based in Sydney\'s Lower North Shore. Experience precision, care, and trust.',
+    "Japanese-style residential cleaning service based in Sydney's Lower North Shore. Experience precision, care, and trust.",
 }
 
 export default async function RootLayout({
@@ -30,7 +37,13 @@ export default async function RootLayout({
   const contact = await client.fetch<Contact | null>(contactQuery, {}, { next: { revalidate: 60 } })
 
   return (
-    <html lang="en" className={`${noto.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} ${noto.variable} h-full`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=swap"
+        />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         <LanguageProvider>
           <SiteShell contact={contact}>{children}</SiteShell>

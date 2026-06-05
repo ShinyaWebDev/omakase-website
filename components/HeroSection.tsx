@@ -12,18 +12,20 @@ interface Props {
 
 const fallback = {
   en: {
-    tagline: 'Cleaning is Therapy',
-    heading: 'Japanese-style cleaning for your Sydney home',
+    tagline: 'Omotenashi Spirit',
+    heading: 'Cleaning is Therapy',
     subheading:
-      'Experience the calm of a truly clean home. We bring Japanese precision, personal care, and respectful service to every visit.',
-    cta: 'Book Now',
+      'Japanese precision for a serene home. Thoughtful cleaning that restores order, calm, and breathing room.',
+    cta: 'Book Your Ritual',
+    secondary: 'View Services',
   },
   ja: {
-    tagline: 'お掃除はセラピー',
-    heading: 'シドニーのご自宅に、日本式のお掃除を',
+    tagline: 'お任せクリーニング',
+    heading: 'お掃除はセラピー',
     subheading:
-      '本当にきれいな空間が生む、静かな安らぎを体験してください。丁寧さ、心遣い、信頼を大切に、毎回のサービスをお届けします。',
+      '日本式の丁寧な清掃で、心整う暮らしを。清潔さだけでなく、空間と気持ちを整えます。',
     cta: '予約する',
+    secondary: 'サービスを見る',
   },
 }
 
@@ -31,57 +33,71 @@ export default function HeroSection({ data }: Props) {
   const { lang } = useLanguage()
   const f = fallback[lang]
 
-  const tagline = data?.[`tagline_${lang}` as keyof Hero] as string | undefined || f.tagline
-  const heading = data?.[`heading_${lang}` as keyof Hero] as string | undefined || f.heading
-  const subheading = data?.[`subheading_${lang}` as keyof Hero] as string | undefined || f.subheading
-  const cta = data?.[`cta_label_${lang}` as keyof Hero] as string | undefined || f.cta
+  const tagline = (data?.[`tagline_${lang}` as keyof Hero] as string | undefined) || f.tagline
+  const heading = (data?.[`heading_${lang}` as keyof Hero] as string | undefined) || f.heading
+  const subheading = (data?.[`subheading_${lang}` as keyof Hero] as string | undefined) || f.subheading
+  const cta = (data?.[`cta_label_${lang}` as keyof Hero] as string | undefined) || f.cta
 
   const imageUrl = data?.background_image
     ? urlFor(data.background_image).width(1600).height(900).url()
     : null
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-navy">
-      {imageUrl && (
+    <section className="relative min-h-[680px] h-[90vh] flex items-center overflow-hidden pt-18">
+      {imageUrl ? (
         <Image
           src={imageUrl}
           alt="Hero background"
           fill
           priority
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center opacity-60"
+          sizes="100vw"
+        />
+      ) : (
+        <Image
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=80"
+          alt="Serene sunlit home interior with natural materials"
+          fill
+          priority
+          className="object-cover object-center"
           sizes="100vw"
         />
       )}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/40 to-navy/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/5" />
+      <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background to-transparent" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-24 text-white">
-        <p className="text-teal text-sm font-semibold tracking-[0.2em] uppercase mb-4">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-16">
+        <div className="max-w-2xl">
+        <span className="inline-block rounded-full bg-primary-container/20 px-4 py-1 text-primary text-xs font-semibold tracking-[0.1em] uppercase mb-6">
           {tagline}
-        </p>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 max-w-3xl">
+        </span>
+        <h1 className="text-[36px] md:text-[56px] font-light leading-[1.15] text-on-background mb-5">
           {heading}
+          {lang === 'en' && (
+            <span className="block text-primary italic">お掃除はセラピー</span>
+          )}
         </h1>
-        <p className="text-lg sm:text-xl text-white/75 leading-relaxed mb-10 max-w-2xl">
+        <p className="text-lg text-on-surface-variant leading-relaxed mb-10 max-w-xl">
           {subheading}
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-teal text-white font-semibold rounded-full text-base hover:bg-opacity-90 transition-all duration-200 shadow-lg"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-on-primary text-xs font-semibold tracking-widest uppercase rounded-full hover:opacity-90 transition-opacity"
           >
             {cta}
+            <span className="material-symbols-outlined text-lg">calendar_today</span>
           </Link>
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/40 text-white font-semibold rounded-full text-base hover:border-white hover:bg-white/10 transition-all duration-200"
+            className="inline-flex items-center justify-center px-8 py-4 border border-secondary text-secondary text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-secondary/5 transition-colors"
           >
-            {lang === 'en' ? 'View Services' : 'サービスを見る'}
+            {f.secondary}
           </Link>
         </div>
+        </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-warm-white to-transparent" />
     </section>
   )
 }
