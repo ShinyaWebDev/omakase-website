@@ -235,9 +235,7 @@ export default function ServicesContent({ services, contact, pageText }: Props) 
             <h2 className="mb-6 text-2xl md:text-[32px] font-normal leading-[1.3]">
               {lang === 'en' ? mainService.name_en : mainService.name_ja}
             </h2>
-            <p className="mb-8 whitespace-pre-line text-lg leading-relaxed text-on-surface-variant">
-              {localizedDescription(mainService, lang)}
-            </p>
+            <ServiceDescription service={mainService} lang={lang} />
             <ServiceChecklist service={mainService} lang={lang} />
           </div>
         </div>
@@ -373,6 +371,7 @@ function ServiceChecklist({ service, lang }: { service: ServiceDetail; lang: 'en
   const points = localizedDescription(service, lang)
     .split(/[.\n。]/)
     .map((item) => item.trim())
+    .filter((item) => !parseRateRow(item))
     .filter((item) => item.length > 8)
     .slice(0, 3)
 
@@ -391,10 +390,10 @@ function ServiceChecklist({ service, lang }: { service: ServiceDetail; lang: 'en
 function ServiceCard({ service, lang }: { service: ServiceDetail; lang: 'en' | 'ja' }) {
   return (
     <article className="flex h-full flex-col rounded-lg border border-outline-variant/10 bg-surface p-8 transition-transform hover:-translate-y-1">
-      <div className="mb-6 flex items-start justify-between gap-4">
+      {/* <div className="mb-6 flex items-start justify-between gap-4">
         <ServiceIcon icon={service.icon || 'cleaning_services'} className="text-4xl text-primary" />
         {service.price && <span className="text-lg font-medium text-primary">{service.price}</span>}
-      </div>
+      </div> */}
       {service.isHighlighted && (
         <span className="mb-3 self-start rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-on-primary">
           {lang === 'en' ? 'Popular' : '人気'}
@@ -432,20 +431,80 @@ function ServiceDescription({ service, lang }: { service: ServiceDetail; lang: '
   }
 
   const [intro, ...items] = lines
+  const rateRows = items.map(parseRateRow)
+  const isRateTable = rateRows.length > 0 && rateRows.every(Boolean)
 
   return (
     <div className="mb-6 flex-grow">
       <p className="mb-4 text-on-surface-variant leading-relaxed">{intro}</p>
-      <div className="divide-y divide-outline-variant/30 rounded-lg border border-outline-variant/20 bg-surface-container-lowest">
-        {items.map((item) => {
-          const [name, price] = item.split(/\s+[—-]\s+/)
-          return (
-            <div key={item} className="flex items-center justify-between gap-4 px-4 py-3 text-sm">
-              <span className="text-on-surface">{name || item}</span>
-              {price && <span className="shrink-0 font-medium text-primary">{price}</span>}
-            </div>
-          )
-        })}
+      {isRateTable ? (
+        <RateTable rows={rateRows.filter(Boolean) as RateRow[]} />
+      ) : (
+        <div className="divide-y divide-outline-variant/30 rounded-lg border border-outline-variant/20 bg-surface-container-lowest">
+          {items.map((item) => {
+            const [name, price] = item.split(/\s+[—-]\s+/)
+            return (
+              <div key={item} className="flex items-center justify-between gap-4 px-4 py-3 text-sm">
+                <span className="text-on-surface">{name || item}</span>
+                {price && <span className="shrink-0 font-medium text-primary">{price}</span>}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+interface RateRow {
+  duration: string
+  rates: Record<string, string>
+}
+
+const rateColumns = [
+  { key: 'Monthly', label: 'Monthly' },
+  { key: 'Every 3 weeks', label: '3 wks' },
+  { key: 'Fortnightly', label: '2 wks' },
+  { key: 'Weekly', label: 'Weekly' },
+]
+
+function parseRateRow(line: string): RateRow | null {
+  const [duration, rest] = line.split(':')
+  if (!duration || !rest) return null
+
+  const rates = rest.split('/').reduce<Record<string, string>>((acc, part) => {
+    const match = part.trim().match(/^(.+?)\s+(\$[\d,]+(?:\+)?(?:\s*\w+)?)$/)
+    if (match) {
+      acc[match[1].trim()] = match[2].trim()
+    }
+    return acc
+  }, {})
+
+  return Object.keys(rates).length > 0 ? { duration: duration.trim(), rates } : null
+}
+
+function RateTable({ rows }: { rows: RateRow[] }) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-outline-variant/20 bg-surface-container-lowest text-sm">
+      <div className="grid grid-cols-[72px_repeat(4,minmax(0,1fr))] bg-primary-fixed/60 text-[10px] font-semibold uppercase tracking-widest text-on-primary-fixed-variant">
+        <div className="px-3 py-3">Hours</div>
+        {rateColumns.map((column) => (
+          <div key={column.key} className="px-2 py-3 text-right" title={column.key}>
+            {column.label}
+          </div>
+        ))}
+      </div>
+      <div className="divide-y divide-outline-variant/30">
+        {rows.map((row) => (
+          <div key={row.duration} className="grid grid-cols-[72px_repeat(4,minmax(0,1fr))]">
+            <div className="px-3 py-3 font-medium text-on-surface">{row.duration}</div>
+            {rateColumns.map((column) => (
+              <div key={column.key} className="px-2 py-3 text-right font-medium text-primary">
+                {row.rates[column.key] || '-'}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )

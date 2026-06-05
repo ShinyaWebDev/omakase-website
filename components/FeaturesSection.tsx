@@ -69,7 +69,7 @@ export default function FeaturesSection({ features }: Props) {
             key={feature._id}
             className="flex items-center gap-4"
           >
-            <FeatureIcon icon={feature.icon} />
+            {/* <FeatureIcon icon={feature.icon} /> */}
             <div>
               <h3 className="text-lg md:text-xl font-medium leading-[1.4] mb-1">
                 {lang === 'en' ? feature.title_en : feature.title_ja}

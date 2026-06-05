@@ -4,8 +4,8 @@ import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
 import SiteShell from '@/components/SiteShell'
 import { client } from '@/sanity/lib/client'
-import { contactQuery, siteSettingsQuery } from '@/sanity/lib/queries'
-import type { Contact, SiteSettings } from '@/types/sanity'
+import { siteSettingsQuery } from '@/sanity/lib/queries'
+import type { SiteSettings } from '@/types/sanity'
 
 export const revalidate = 60
 
@@ -34,10 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const opts = { next: { revalidate: 60 } }
-  const [contact, siteSettings] = await Promise.all([
-    client.fetch<Contact | null>(contactQuery, {}, opts),
-    client.fetch<SiteSettings | null>(siteSettingsQuery, {}, opts),
-  ])
+  const siteSettings = await client.fetch<SiteSettings | null>(siteSettingsQuery, {}, opts)
 
   return (
     <html lang="en" className={`${inter.variable} ${noto.variable} h-full`}>
@@ -49,7 +46,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col antialiased">
         <LanguageProvider>
-          <SiteShell contact={contact} siteSettings={siteSettings}>{children}</SiteShell>
+          <SiteShell siteSettings={siteSettings}>{children}</SiteShell>
         </LanguageProvider>
       </body>
     </html>

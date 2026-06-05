@@ -8,18 +8,18 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-surface-container">
-      <div className="max-w-300 mx-auto px-4 md:px-16 py-20 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="max-w-300 mx-auto px-4 md:px-16 py-8 md:py-20 grid grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8">
 
-        <div className="md:col-span-1">
-          <div className="text-2xl font-light text-primary tracking-widest mb-4">OMAKASE</div>
-          <p className="text-on-surface-variant text-sm leading-relaxed">
+        <div className="col-span-3 md:col-span-1">
+          <div className="text-xl md:text-2xl font-light text-primary tracking-widest mb-2 md:mb-4">OMAKASE</div>
+          <p className="text-on-surface-variant text-xs md:text-sm leading-relaxed max-w-sm">
             {lang === 'en'
               ? '© 2025 OMAKASE Japanese Cleaning. Serenity in Every Corner.'
               : '© 2025 OMAKASE Japanese Cleaning. 隅々まで、整う安心を。'}
           </p>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 md:gap-2">
           <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
             {lang === 'en' ? 'Services' : 'サービス'}
           </h4>
@@ -31,14 +31,14 @@ export default function Footer() {
             <Link
               key={item.href + item.en}
               href={item.href}
-              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+              className="text-on-surface-variant hover:text-primary transition-colors text-xs md:text-sm leading-relaxed"
             >
               {lang === 'en' ? item.en : item.ja}
             </Link>
           ))}
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 md:gap-2">
           <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
             {lang === 'en' ? 'Company' : '会社情報'}
           </h4>
@@ -50,14 +50,14 @@ export default function Footer() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+              className="text-on-surface-variant hover:text-primary transition-colors text-xs md:text-sm leading-relaxed"
             >
               {lang === 'en' ? item.en : item.ja}
             </Link>
           ))}
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1.5 md:gap-2">
           <h4 className="text-xs font-semibold tracking-widest uppercase text-on-surface mb-2">
             {lang === 'en' ? 'Connect' : 'つながる'}
           </h4>
@@ -69,7 +69,7 @@ export default function Footer() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-on-surface-variant hover:text-primary transition-colors text-sm"
+              className="text-on-surface-variant hover:text-primary transition-colors text-xs md:text-sm leading-relaxed"
             >
               {item.label}
             </Link>
