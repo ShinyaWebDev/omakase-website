@@ -1,39 +1,39 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Stitch Design System — Sage Green Palette */
-  --color-primary: #3c6752;
+  /* OMAKASE warm yellow/gold palette */
+  --color-primary: #b77900;
   --color-on-primary: #ffffff;
-  --color-primary-container: #7daa92;
-  --color-on-primary-container: #123f2c;
-  --color-primary-fixed: #beedd3;
-  --color-primary-fixed-dim: #a2d1b7;
-  --color-on-primary-fixed: #002114;
-  --color-on-primary-fixed-variant: #244f3b;
-  --color-secondary: #6b5c4c;
+  --color-primary-container: #ffd76a;
+  --color-on-primary-container: #3f2800;
+  --color-primary-fixed: #fff0b8;
+  --color-primary-fixed-dim: #f0be32;
+  --color-on-primary-fixed: #2a1a00;
+  --color-on-primary-fixed-variant: #765000;
+  --color-secondary: #6f4f28;
   --color-on-secondary: #ffffff;
-  --color-secondary-container: #f4dfcb;
-  --color-on-secondary-container: #716252;
-  --color-tertiary: #505f78;
+  --color-secondary-container: #f3dfc1;
+  --color-on-secondary-container: #34210d;
+  --color-tertiary: #725c2d;
   --color-on-tertiary: #ffffff;
-  --color-surface: #f9f9f9;
-  --color-on-surface: #1a1c1c;
-  --color-on-surface-variant: #414943;
-  --color-surface-variant: #e2e2e2;
-  --color-surface-container: #eeeeee;
-  --color-surface-container-low: #f3f3f3;
+  --color-surface: #fffaf0;
+  --color-on-surface: #241a08;
+  --color-on-surface-variant: #5a4a31;
+  --color-surface-variant: #efe0bd;
+  --color-surface-container: #f7e9c8;
+  --color-surface-container-low: #fff3d6;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-high: #e8e8e8;
-  --color-surface-container-highest: #e2e2e2;
-  --color-surface-bright: #f9f9f9;
-  --color-surface-dim: #dadada;
-  --color-outline: #717973;
-  --color-outline-variant: #c1c8c2;
-  --color-background: #f9f9f9;
-  --color-on-background: #1a1c1c;
-  --color-inverse-surface: #2f3131;
-  --color-inverse-on-surface: #f1f1f1;
-  --color-inverse-primary: #a2d1b7;
+  --color-surface-container-high: #ead8aa;
+  --color-surface-container-highest: #dec78f;
+  --color-surface-bright: #fffaf0;
+  --color-surface-dim: #e5d3a8;
+  --color-outline: #89754e;
+  --color-outline-variant: #d3bd86;
+  --color-background: #fffaf0;
+  --color-on-background: #241a08;
+  --color-inverse-surface: #3a2b12;
+  --color-inverse-on-surface: #fff4df;
+  --color-inverse-primary: #ffd76a;
 
   /* Font stack */
   --font-sans: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
@@ -49,8 +49,8 @@
 }
 
 body {
-  background-color: #f9f9f9;
-  color: #1a1c1c;
+  background-color: #fffaf0;
+  color: #241a08;
   font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
 }
 
@@ -73,8 +73,8 @@ html {
 }
 
 .paper-texture {
-  background-color: #f3f3f3;
+  background-color: #fff3d6;
   background-image:
-    radial-gradient(circle at 1px 1px, rgb(60 103 82 / 0.08) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgb(183 121 0 / 0.12) 1px, transparent 0);
   background-size: 22px 22px;
 }

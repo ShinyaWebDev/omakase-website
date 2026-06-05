@@ -81,7 +81,7 @@ export default function Header({ siteSettings }: Props) {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setLang(lang === 'en' ? 'ja' : 'en')}
-            className="text-on-surface-variant text-xs font-semibold tracking-widest hidden sm:block hover:text-primary transition-colors"
+            className="text-on-surface-variant text-xs font-semibold tracking-widest hover:text-primary transition-colors"
             aria-label="Toggle language"
           >
             {lang === 'en' ? 'JP' : 'EN'}
@@ -89,7 +89,7 @@ export default function Header({ siteSettings }: Props) {
 
           <Link
             href="/services#booking"
-            className="bg-primary text-on-primary px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase hover:opacity-90 transition-opacity"
+            className="hidden sm:inline-flex bg-primary text-on-primary px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase hover:opacity-90 transition-opacity"
           >
             {lang === 'en' ? 'Book Now' : '予約する'}
           </Link>
@@ -110,35 +110,56 @@ export default function Header({ siteSettings }: Props) {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden bg-surface border-t border-outline-variant/20 px-4 pb-4 pt-2">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block py-2.5 text-sm text-on-surface-variant hover:text-primary transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="pt-3 flex items-center gap-3">
+      <div
+        className={`fixed inset-0 top-18 z-40 bg-inverse-surface/30 backdrop-blur-sm transition-opacity md:hidden ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      <aside
+        className={`fixed left-0 top-18 z-50 max-h-[calc(100dvh-7rem)] min-h-[360px] w-[82vw] max-w-80 overflow-y-auto rounded-br-2xl border-r border-b border-outline-variant/30 bg-surface shadow-2xl transition-transform duration-300 ease-out md:hidden ${
+          menuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="flex min-h-[360px] flex-col px-5 py-5">
+          <nav className="flex flex-col gap-1">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`rounded-lg px-3 py-3 text-sm transition-colors ${
+                  pathname === item.href
+                    ? 'bg-primary-fixed/70 text-primary font-medium'
+                    : 'text-on-surface-variant hover:bg-surface-container hover:text-primary'
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="mt-auto border-t border-outline-variant/20 pt-5">
             <button
               onClick={() => setLang(lang === 'en' ? 'ja' : 'en')}
-              className="text-xs font-semibold tracking-widest text-on-surface-variant"
+              className="mb-3 inline-flex w-full items-center justify-between rounded-lg bg-surface-container px-4 py-3 text-xs font-semibold tracking-widest text-on-surface-variant"
             >
-              {lang === 'en' ? 'JP' : 'EN'}
+              <span>{lang === 'en' ? 'Language' : '言語'}</span>
+              <span>{lang === 'en' ? 'JP' : 'EN'}</span>
             </button>
             <Link
               href="/services#booking"
-              className="bg-primary text-on-primary px-5 py-2 rounded-full text-xs font-semibold tracking-widest uppercase"
+              className="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-xs font-semibold uppercase tracking-widest text-on-primary"
               onClick={() => setMenuOpen(false)}
             >
               {lang === 'en' ? 'Book Now' : '予約する'}
             </Link>
           </div>
         </div>
-      )}
+      </aside>
     </header>
   )
 }
